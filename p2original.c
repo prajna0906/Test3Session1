@@ -12,16 +12,43 @@ struct _fraction
 {
 int num,den;
 };
-
-fraction input_fraction()
+typedef struct _fraction Fraction;
+Fraction input_fraction()
 {
-    fraction f
+    Fraction f;
     printf("enter the num and den\t");
     scanf("%d%d",&f.num,&f.den);
     return f;
 }
-
-
-
-
-
+Fraction smallest_fraction(Fraction f1, Fraction f2, Fraction f3)
+{
+    int num1=f1.num*f2.den*f3.den;
+    int num2=f2.num*f1.den*f3.den;
+    int num3=f3.num*f1.den*f2.den;
+    if(num1<num2&&num1<num3)
+    {
+        return f1;
+    }
+    else if (num2<num3)
+    {
+        return f2;
+    }
+    else
+    {
+        return f3;
+    }
+}
+void output(Fraction f1, Fraction f2, Fraction f3, Fraction smallest)
+{
+    printf("the smallest of %d/%d,%d/%d,%d/%d is %d/%d\n",f1.num,f1.den,f2.num,f2.den,f3.num,f3.den,smallest.num,smallest.den);
+}
+int main()
+{
+    Fraction f1,f2,f3,smallest;
+    f1=input_fraction();
+    f2=input_fraction();
+    f3=input_fraction();
+    smallest=smallest_fraction(f1,f2,f3);
+    output(f1,f2,f3,smallest);
+    return 0;
+}
